@@ -57,14 +57,15 @@ public class ProjectSecurityConfig {
 	}
 	@Bean
 	SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-		http.authorizeHttpRequests(configurer -> configurer
-				.requestMatchers("/myAccount/**","/myBalance/**","/myCards/**","/contact/**","/myLoan/**","/notices/**").permitAll()
+		http
+		.authorizeHttpRequests(configurer -> configurer
+				.requestMatchers("/myAccount/**","/myBalance/**","/myCards/**","/contact/**","/myLoan/**","/notices/**","/register/**").permitAll()
 				.anyRequest().authenticated())
 		.formLogin(login -> login// hiển thị form login
 						.permitAll())
 				.logout(logout -> logout// logout
 						.permitAll());
-
+		http.csrf().disable();
 		return http.build();
 
 	}
